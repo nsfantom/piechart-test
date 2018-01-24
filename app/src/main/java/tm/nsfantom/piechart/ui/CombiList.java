@@ -116,7 +116,7 @@ public class CombiList extends LinearLayout {
         }
 
         if (acceptListener != null)
-            btnAccept.setOnClickListener(v -> acceptListener.onAccept("agogo"));
+            btnAccept.setOnClickListener(v -> acceptListener.onAccept(parseSelection()));
         if (cancelListener != null)
             btnCancel.setOnClickListener(v -> cancelListener.cancel());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -210,7 +210,7 @@ public class CombiList extends LinearLayout {
 
     private void selectAll(){
         if(multiSelect){
-            for (int i = 0; i < selected.size(); i++) {
+            for (int i = 0; i < adapter.getItemCount(); i++) {
                 selected.put(i,true);
             }
             updateAdapterSelection();
