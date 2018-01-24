@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CombiList">
+        <attr name="list_title" format="string" value = "Title"/>
+        <attr name="multiSelect" format="boolean"/>
+        <attr name="selectAllPosition" format="enum">
+            <enum name="top" value="0"/>
+            <enum name="bottom" value="1"/>
+        </attr>
+        <attr name="acceptBtnText" format="string" value = "proceed"/>
+        <attr name="cancelBtnText" format="string" value = "cancel"/>
+    </declare-styleable>
+</resources>
