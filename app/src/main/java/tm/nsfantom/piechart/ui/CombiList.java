@@ -108,7 +108,7 @@ public class CombiList extends LinearLayout {
                 Timber.d("switch bottom");
                 btnHeaderSelectAll.setVisibility(GONE);
                 btnFooterSelectAll.setVisibility(VISIBLE);
-                btnHeaderSelectAll.setOnClickListener(v->selectAll());
+                btnFooterSelectAll.setOnClickListener(v->selectAll());
             }
         } else {
             btnFooterSelectAll.setVisibility(GONE);
@@ -193,11 +193,12 @@ public class CombiList extends LinearLayout {
         combiItemList.get(0).setChecked(true);
         adapter.setCombiItemList(combiItemList);
         selected = new SparseBooleanArray(combiItemList.size());
+        selected.append(0,true);
         clickListener = (position, isChecked) -> {
             //TODO toggle checked
             if (multiSelect) {
                 if (isChecked) selected.append(position, isChecked);
-                else selected.delete(position);
+                else if(selected.size()>1)selected.delete(position);
                 updateAdapterSelection();
             } else {
                 selectedPosition = position;
@@ -331,8 +332,6 @@ public class CombiList extends LinearLayout {
             notifyDataSetChanged();
         }
 
-
-
         class ItemListVH extends RecyclerView.ViewHolder implements View.OnClickListener {
 
             CombiItemBinding binding;
@@ -343,34 +342,12 @@ public class CombiList extends LinearLayout {
                 binding = DataBindingUtil.bind(itemView);
                 this.view = itemView;
                 itemView.setOnClickListener(this);
-                binding.checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-//                    Timber.d("checked %s: %s",getAdapterPosition(),combiItemList.get(getAdapterPosition()).isChecked());
-//                    combiItemList.get(getAdapterPosition()).setChecked(isChecked);
-//                    Timber.d("after checked %s: %s",getAdapterPosition(),combiItemList.get(getAdapterPosition()).isChecked());
-                    //clickListener.onClick(getAdapterPosition(), isChecked);
-                });
             }
 
             @Override
             public void onClick(View view) {
                 clickListener.onClick(getAdapterPosition(), !binding.checkBox.isChecked());
             }
-        }
-    }
-
-    private enum BtnGravity {
-        top(0), bottom(1);
-        int id;
-
-        BtnGravity(int id) {
-            this.id = id;
-        }
-
-        static BtnGravity fromId(int id) {
-            for (BtnGravity f : values()) {
-                if (f.id == id) return f;
-            }
-            throw new IllegalArgumentException();
         }
     }
 }
