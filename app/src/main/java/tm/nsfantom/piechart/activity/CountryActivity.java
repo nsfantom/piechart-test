@@ -16,9 +16,9 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import io.reactivex.Observable;
+import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 import tm.nsfantom.piechart.BuildConfig;
 import tm.nsfantom.piechart.PieChartApp;
@@ -55,9 +55,9 @@ public final class CountryActivity extends AppCompatActivity {
                 .forEach(countryModel ->
                         countryMap.put(countryModel.getName(), countryModel.getCountryCode()));
         if (BuildConfig.DEBUG)
-            for (Map.Entry<String, String> cm : countryMap.entrySet()) {
-                Timber.d("Country entry: %s, %s", cm.getKey(), cm.getValue());
-            }
+            Observable.fromIterable(countryMap.entrySet())
+                    .subscribeOn(Schedulers.io()).observeOn(Schedulers.io())
+                    .forEach(cm -> Timber.d("Country entry: %s, %s", cm.getKey(), cm.getValue()));
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_dropdown_item_1line,
                 countryMap.keySet().toArray(new String[countryMap.size()]));
@@ -65,10 +65,9 @@ public final class CountryActivity extends AppCompatActivity {
         binding.etCountry.setAdapter(adapter);
         RxAutoCompleteTextView.itemClickEvents(binding.etCountry)
                 .subscribe(event -> {
-                            prefStorage.saveCountryCode(countryMap.get(adapter.getItem(event.position())));
-                            updateText(prefStorage.getCountryCode());
-                        },
-                        e -> Timber.e(e, "error: %s", e.getMessage()));
+                    prefStorage.saveCountryCode(countryMap.get(adapter.getItem(event.position())));
+                    updateText(prefStorage.getCountryCode());
+                }, e -> Timber.e(e, "error: %s", e.getMessage()));
     }
 
     private List<CountryModel> readJsonStream(InputStream in) throws IOException {
