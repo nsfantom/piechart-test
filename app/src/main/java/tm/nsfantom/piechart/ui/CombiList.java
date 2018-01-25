@@ -12,9 +12,7 @@ import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -23,22 +21,16 @@ import java.util.List;
 import timber.log.Timber;
 import tm.nsfantom.piechart.R;
 import tm.nsfantom.piechart.databinding.CombiItemBinding;
-
-/**
- * Created by user on 1/24/18.
- */
+import tm.nsfantom.piechart.databinding.CombiListBinding;
 
 public class CombiList extends LinearLayout {
 
-    private Button btnAccept;
-    private Button btnCancel;
-    private View rootView;
+    CombiListBinding layout;
     private String acceptBtnText;
     private String cancelBtnText;
     private String description;
     private int selectAllPosition;
     private boolean multiSelect;
-    private RecyclerView recyclerView;
     private ItemsAdapter adapter;
 
     private AcceptListener acceptListener;
@@ -62,13 +54,9 @@ public class CombiList extends LinearLayout {
 
     public CombiList(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        TypedArray a = context.getTheme().obtainStyledAttributes(
-                attrs,
-                R.styleable.CombiList,
-                0, 0);
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        rootView = inflater.inflate(R.layout.combi_list, this, true);
-
+        TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.CombiList, 0, 0);
+        LayoutInflater layoutInflater = LayoutInflater.from(context);
+        layout = CombiListBinding.inflate(layoutInflater, this, true);
         try {
             multiSelect = a.getBoolean(R.styleable.CombiList_multiSelect, false);
             selectAllPosition = a.getInteger(R.styleable.CombiList_selectAllPosition, 0);
@@ -84,42 +72,36 @@ public class CombiList extends LinearLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        TextView tvDescription = rootView.findViewById(R.id.tvTitle);
 
-        btnAccept = rootView.findViewById(R.id.btnAccept);
-        btnCancel = rootView.findViewById(R.id.btnCancel);
-        recyclerView = rootView.findViewById(R.id.listHolder);
-        Button btnFooterSelectAll = rootView.findViewById(R.id.footerBtnSelectAll);
-        Button btnHeaderSelectAll = rootView.findViewById(R.id.headerBtnSelectAll);
-
+        layout.tvTitle.setText("cfdsvd");
         if (!TextUtils.isEmpty(description)) {
-            tvDescription.setVisibility(VISIBLE);
-            tvDescription.setText(description);
-        } else tvDescription.setVisibility(GONE);
+            layout.tvTitle.setVisibility(VISIBLE);
+            layout.tvTitle.setText(description);
+        } else layout.tvTitle.setVisibility(GONE);
 
         if (multiSelect) {
             Timber.d("switch multi");
             if (selectAllPosition == 0) {
                 Timber.d("switch top");
-                btnFooterSelectAll.setVisibility(GONE);
-                btnHeaderSelectAll.setVisibility(VISIBLE);
-                btnHeaderSelectAll.setOnClickListener(v->selectAll());
+                layout.footerBtnSelectAll.setVisibility(GONE);
+                layout.headerBtnSelectAll.setVisibility(VISIBLE);
+                layout.headerBtnSelectAll.setOnClickListener(v -> selectAll());
             } else {
                 Timber.d("switch bottom");
-                btnHeaderSelectAll.setVisibility(GONE);
-                btnFooterSelectAll.setVisibility(VISIBLE);
-                btnFooterSelectAll.setOnClickListener(v->selectAll());
+                layout.headerBtnSelectAll.setVisibility(GONE);
+                layout.footerBtnSelectAll.setVisibility(VISIBLE);
+                layout.footerBtnSelectAll.setOnClickListener(v -> selectAll());
             }
         } else {
-            btnFooterSelectAll.setVisibility(GONE);
-            btnHeaderSelectAll.setVisibility(GONE);
+            layout.footerBtnSelectAll.setVisibility(GONE);
+            layout.headerBtnSelectAll.setVisibility(GONE);
         }
 
         if (acceptListener != null)
-            btnAccept.setOnClickListener(v -> acceptListener.onAccept(parseSelection()));
+            layout.btnAccept.setOnClickListener(v -> acceptListener.onAccept(parseSelection()));
         if (cancelListener != null)
-            btnCancel.setOnClickListener(v -> cancelListener.cancel());
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            layout.btnCancel.setOnClickListener(v -> cancelListener.cancel());
+        layout.listHolder.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     public String getAcceptBtnText() {
@@ -160,8 +142,8 @@ public class CombiList extends LinearLayout {
         this.selectAllPosition = selectAllPosition;
         invalidate();
         requestLayout();
-        if(multiSelect)
-        this.onFinishInflate();
+        if (multiSelect)
+            this.onFinishInflate();
     }
 
     public boolean isMultiSelect() {
@@ -178,14 +160,12 @@ public class CombiList extends LinearLayout {
 
     public void setAcceptListener(AcceptListener acceptListener) {
         this.acceptListener = acceptListener;
-        if (btnAccept != null)
-            btnAccept.setOnClickListener(v -> acceptListener.onAccept(parseSelection()));
+        layout.btnAccept.setOnClickListener(v -> acceptListener.onAccept(parseSelection()));
     }
 
     public void setCancelListener(CancelListener cancelListener) {
         this.cancelListener = cancelListener;
-        if (btnCancel != null)
-            btnCancel.setOnClickListener(v -> cancelListener.cancel());
+        layout.btnCancel.setOnClickListener(v -> cancelListener.cancel());
     }
 
     public void setCombiItemList(List<CombiItem> combiItemList) {
@@ -193,12 +173,12 @@ public class CombiList extends LinearLayout {
         combiItemList.get(0).setChecked(true);
         adapter.setCombiItemList(combiItemList);
         selected = new SparseBooleanArray(combiItemList.size());
-        selected.append(0,true);
+        selected.append(0, true);
         clickListener = (position, isChecked) -> {
             //TODO toggle checked
             if (multiSelect) {
                 if (isChecked) selected.append(position, isChecked);
-                else if(selected.size()>1)selected.delete(position);
+                else if (selected.size() > 1) selected.delete(position);
                 updateAdapterSelection();
             } else {
                 selectedPosition = position;
@@ -206,13 +186,13 @@ public class CombiList extends LinearLayout {
                 Toast.makeText(getContext(), "clicked: " + position, Toast.LENGTH_SHORT).show();
             }
         };
-        if (recyclerView != null) recyclerView.setAdapter(adapter);
+        layout.listHolder.setAdapter(adapter);
     }
 
-    private void selectAll(){
-        if(multiSelect){
+    private void selectAll() {
+        if (multiSelect) {
             for (int i = 0; i < adapter.getItemCount(); i++) {
-                selected.put(i,true);
+                selected.put(i, true);
             }
             updateAdapterSelection();
         }
@@ -225,8 +205,8 @@ public class CombiList extends LinearLayout {
         else adapter.setSelected(selectedPosition);
     }
 
-    private String parseSelection(){
-        if(multiSelect)
+    private String parseSelection() {
+        if (multiSelect)
             return "selected: ".concat(selected.toString());
         else
             return "selected: ".concat(String.valueOf(selectedPosition));
@@ -291,8 +271,8 @@ public class CombiList extends LinearLayout {
         public void onBindViewHolder(ItemListVH holder, int position) {
             if (position != holder.getAdapterPosition()) return;
             CombiItem combiItem = combiItemList.get(position);
-            holder.binding.setCombiItem(combiItem);
-            holder.binding.checkBox.setClickable(false);
+            holder.layout.setCombiItem(combiItem);
+            holder.layout.checkBox.setClickable(false);
         }
 
         public void setCombiItemList(List<CombiItem> combiItemList) {
@@ -310,8 +290,8 @@ public class CombiList extends LinearLayout {
             for (int i = 0; i < combiItemList.size(); i++) {
                 CombiItem combiItem = combiItemList.get(i);
                 combiItem.setChecked(selected.get(i));
-                newList.add(i,combiItem);
-                Timber.d("selected: %s is %s",i,selected.get(i));
+                newList.add(i, combiItem);
+                Timber.d("selected: %s is %s", i, selected.get(i));
             }
             this.combiItemList.clear();
             this.combiItemList.addAll(newList);
@@ -323,9 +303,9 @@ public class CombiList extends LinearLayout {
             List<CombiItem> newList = new ArrayList<>();
             for (int i = 0; i < combiItemList.size(); i++) {
                 CombiItem combiItem = combiItemList.get(i);
-                combiItem.setChecked(selected==i);
-                newList.add(i,combiItem);
-                Timber.e("set selected: %s is %s",i,combiItem.isChecked());
+                combiItem.setChecked(selected == i);
+                newList.add(i, combiItem);
+                Timber.e("set selected: %s is %s", i, combiItem.isChecked());
             }
             this.combiItemList.clear();
             this.combiItemList.addAll(newList);
@@ -334,19 +314,19 @@ public class CombiList extends LinearLayout {
 
         class ItemListVH extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-            CombiItemBinding binding;
+            CombiItemBinding layout;
             View view;
 
             public ItemListVH(View itemView) {
                 super(itemView);
-                binding = DataBindingUtil.bind(itemView);
+                layout = DataBindingUtil.bind(itemView);
                 this.view = itemView;
                 itemView.setOnClickListener(this);
             }
 
             @Override
             public void onClick(View view) {
-                clickListener.onClick(getAdapterPosition(), !binding.checkBox.isChecked());
+                clickListener.onClick(getAdapterPosition(), !layout.checkBox.isChecked());
             }
         }
     }

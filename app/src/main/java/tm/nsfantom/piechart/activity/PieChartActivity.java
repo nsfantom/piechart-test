@@ -1,5 +1,5 @@
 
-package tm.nsfantom.piechart;
+package tm.nsfantom.piechart.activity;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -32,6 +32,8 @@ import com.github.mikephil.charting.utils.MPPointF;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+
+import tm.nsfantom.piechart.R;
 
 public class PieChartActivity extends DemoBase implements OnSeekBarChangeListener,
         OnChartValueSelectedListener {

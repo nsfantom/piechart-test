@@ -1,10 +1,12 @@
 
-package tm.nsfantom.piechart;
+package tm.nsfantom.piechart.activity;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
+
+import tm.nsfantom.piechart.R;
 
 /**
  * Baseclass of all Activities of the Demo Application.

@@ -1,4 +1,4 @@
-package tm.nsfantom.piechart;
+package tm.nsfantom.piechart.activity;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import tm.nsfantom.piechart.R;
 import tm.nsfantom.piechart.databinding.ActivityDemoBinding;
 import tm.nsfantom.piechart.ui.CombiList;
 
