@@ -15,11 +15,11 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/tvCountry"
+            app:layout_constraintBottom_toTopOf="@+id/tsCountry"
             app:layout_constraintVertical_chainStyle="spread_inside"/>
 
-        <TextView
-            android:id="@+id/tvCountry"
+        <TextSwitcher
+            android:id="@+id/tsCountry"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_margin="8dp"

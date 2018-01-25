@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">PieChart</string>
-    <string name="country_code">Country code:</string>
+    <string name="country_code">Country code: </string>
     <string name="hint_search">Start typing for search…</string>
 </resources>

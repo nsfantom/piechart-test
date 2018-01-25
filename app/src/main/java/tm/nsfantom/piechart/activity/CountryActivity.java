@@ -1,10 +1,17 @@
 package tm.nsfantom.piechart.activity;
 
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
+import android.widget.ViewSwitcher;
 
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
@@ -40,6 +47,15 @@ public final class CountryActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        binding.tsCountry.setFactory(() -> {
+            // Create run time textView with some attributes like gravity,
+            // color, etc.
+            TextView myText = new TextView(CountryActivity.this);
+            myText.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
+            myText.setTextColor(Color.RED);
+            return myText;
+        });
+        loadAnimations();
         PrefStorage prefStorage = ((PieChartApp) getApplication()).getPrefStorage();
         updateText(prefStorage.getCountryCode());
 
@@ -52,6 +68,7 @@ public final class CountryActivity extends AppCompatActivity {
 
         HashMap<String, String> countryMap = new HashMap<>();
         Observable.fromIterable(list)
+                .subscribeOn(Schedulers.single())
                 .forEach(countryModel ->
                         countryMap.put(countryModel.getName(), countryModel.getCountryCode()));
         if (BuildConfig.DEBUG)
@@ -88,6 +105,18 @@ public final class CountryActivity extends AppCompatActivity {
     }
 
     private void updateText(String text) {
-        binding.tvCountry.setText(getString(R.string.country_code).concat(text.isEmpty() ? "unset" : text));
+        binding.tsCountry.setText(getString(R.string.country_code).concat(text.isEmpty() ? "unset" : text));
+    }
+    void loadAnimations() {
+
+        // Declare the in and out animations and initialize them
+        Animation in = AnimationUtils.loadAnimation(this,
+                android.R.anim.slide_in_left);
+        Animation out = AnimationUtils.loadAnimation(this,
+                android.R.anim.slide_out_right);
+
+        // set the animation type of textSwitcher
+        binding.tsCountry.setInAnimation(in);
+        binding.tsCountry.setOutAnimation(out);
     }
 }
