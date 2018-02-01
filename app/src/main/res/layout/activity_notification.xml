@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:id="@+id/svTop"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/btnNotify"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            android:layout_margin="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/etVibroArray"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Vibro array(long[])"
+                    android:inputType="numberDecimal"
+                    android:text="@string/vibro_kombat"/>
+            </LinearLayout>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/btnNotify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="notify"
+            app:layout_constraintTop_toBottomOf="@+id/svTop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/etDelay"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"/>
+
+        <EditText
+            android:id="@+id/etDelay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="5"
+            android:maxLength="5"
+            android:inputType="numberDecimal"
+            android:hint="seconds"
+            android:text="5"
+            app:layout_constraintTop_toTopOf="@+id/btnNotify"
+            app:layout_constraintBottom_toBottomOf="@+id/btnNotify"
+            app:layout_constraintStart_toEndOf="@+id/btnNotify"
+            app:layout_constraintEnd_toStartOf="@+id/btnNotifyDelay"/>
+
+        <Button
+            android:id="@+id/btnNotifyDelay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="notify with delay"
+            app:layout_constraintTop_toTopOf="@+id/btnNotify"
+            app:layout_constraintBottom_toBottomOf="@+id/btnNotify"
+            app:layout_constraintStart_toEndOf="@+id/etDelay"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    </android.support.constraint.ConstraintLayout>
+</layout>

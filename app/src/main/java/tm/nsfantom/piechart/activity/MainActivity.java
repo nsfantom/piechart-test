@@ -26,5 +26,6 @@ public class MainActivity extends AppCompatActivity {
         binding.btnPieChart.setOnClickListener(v-> startActivity(new Intent(this, PieChartActivity.class)));
         binding.btnCustomCheckList.setOnClickListener(v->startActivity(new Intent(this, DemoActivity.class)));
         binding.btnContryList.setOnClickListener(v-> startActivity(new Intent(this, CountryActivity.class)));
+        binding.btnNotification.setOnClickListener(v-> startActivity(new Intent(this, NotificationActivity.class)));
     }
 }
