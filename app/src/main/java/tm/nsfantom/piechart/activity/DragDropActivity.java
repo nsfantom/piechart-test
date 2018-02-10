@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import timber.log.Timber;
 import tm.nsfantom.piechart.R;
 import tm.nsfantom.piechart.databinding.ActivityDragdropBinding;
 
@@ -93,6 +94,10 @@ public final class DragDropActivity extends AppCompatActivity {
                     ViewGroup owner = (ViewGroup) view.getParent();
                     owner.removeView(view);
                     LinearLayout container = (LinearLayout) v;
+                    if(v == owner) {
+                        Timber.e("the same");
+
+                    }
                     container.addView(view);
                     view.setVisibility(View.VISIBLE);
                     break;
@@ -103,5 +108,18 @@ public final class DragDropActivity extends AppCompatActivity {
             }
             return true;
         }
+
+//        private void swap(View view, ViewGroup owner, float x, float y){
+//            for(int _numChildren = owner.getChildCount(); --_numChildren)
+//            {
+//                View _child = owner.getChildAt(_numChildren);
+//                Rect _bounds = new Rect();
+//                _child.getHitRect(_bounds);
+//                if (_bounds.contains(x, y)){
+//
+//                }
+//                // In View = true!!!
+//            }
+//        }
     }
 }
