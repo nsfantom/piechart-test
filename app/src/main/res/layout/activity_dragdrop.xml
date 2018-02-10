@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <tm.nsfantom.piechart.ui.ForList
+            android:id="@+id/forList"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/defaultHolder"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:header_text="For "
+            app:footer_text="End"/>
+
+        <LinearLayout
+            android:id="@+id/defaultHolder"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/forList">
+
+            <Button
+                android:id="@+id/button5"
+                style="?attr/buttonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Button5"
+                android:theme="@style/FlatButton" />
+
+            <Button
+                android:id="@+id/button4"
+                style="?attr/buttonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Button4 -> touch"
+                android:theme="@style/FlatButton" />
+
+            <Button
+                android:id="@+id/button6"
+                style="?attr/buttonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Button6 -> touch"
+                android:theme="@style/FlatButton" />
+
+            <Button
+                android:id="@+id/button7"
+                style="?attr/buttonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Button7 -> longClick"
+                android:theme="@style/FlatButton" />
+        </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
+</layout>

@@ -10,7 +10,7 @@ import tm.nsfantom.piechart.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
-    ActivityMainBinding binding;
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,5 +27,6 @@ public class MainActivity extends AppCompatActivity {
         binding.btnCustomCheckList.setOnClickListener(v->startActivity(new Intent(this, DemoActivity.class)));
         binding.btnContryList.setOnClickListener(v-> startActivity(new Intent(this, CountryActivity.class)));
         binding.btnNotification.setOnClickListener(v-> startActivity(new Intent(this, NotificationActivity.class)));
+        binding.btnDragDrop.setOnClickListener(v-> startActivity(new Intent(this, DragDropActivity.class)));
     }
 }

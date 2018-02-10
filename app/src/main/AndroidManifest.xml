@@ -20,7 +20,8 @@
         <activity android:name=".activity.PieChartActivity" />
         <activity android:name=".activity.DemoActivity" />
         <activity android:name=".activity.CountryActivity" />
-        <activity android:name=".activity.NotificationActivity"></activity>
+        <activity android:name=".activity.NotificationActivity"/>
+        <activity android:name=".activity.DragDropActivity"/>
     </application>
 
 </manifest>

@@ -10,4 +10,11 @@
         <attr name="acceptBtnText" format="string" value = "proceed"/>
         <attr name="cancelBtnText" format="string" value = "cancel"/>
     </declare-styleable>
+    <declare-styleable name="ForList">
+        <attr name="header_text" format="string" value = "For"/>
+        <attr name="mainColor" format="color"/>
+        <attr name="secondColor" format="color"/>
+        <attr name="footer_text" format="string" value="End"/>
+        <attr name="text_color" format="color"/>
+    </declare-styleable>
 </resources>
