@@ -9,7 +9,7 @@ import tm.nsfantom.piechart.util.PrefStorage;
  * Created by user on 1/24/18.
  */
 
-public class PieChartApp extends Application {
+public final class PieChartApp extends Application {
 
     private PrefStorage prefStorage;
 

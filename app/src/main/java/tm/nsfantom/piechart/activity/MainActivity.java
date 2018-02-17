@@ -28,5 +28,6 @@ public class MainActivity extends AppCompatActivity {
         binding.btnContryList.setOnClickListener(v-> startActivity(new Intent(this, CountryActivity.class)));
         binding.btnNotification.setOnClickListener(v-> startActivity(new Intent(this, NotificationActivity.class)));
         binding.btnDragDrop.setOnClickListener(v-> startActivity(new Intent(this, DragDropActivity.class)));
+        binding.btnRing.setOnClickListener(v->startActivity(new Intent(this,RingActivity.class)));
     }
 }

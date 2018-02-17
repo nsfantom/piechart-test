@@ -22,6 +22,7 @@
         <activity android:name=".activity.CountryActivity" />
         <activity android:name=".activity.NotificationActivity"/>
         <activity android:name=".activity.DragDropActivity"/>
+        <activity android:name=".activity.RingActivity" />
     </application>
 
 </manifest>
