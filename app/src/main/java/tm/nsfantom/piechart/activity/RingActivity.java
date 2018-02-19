@@ -38,8 +38,10 @@ public final class RingActivity extends AppCompatActivity {
         binding.seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if (fromUser)
+                if (fromUser){
+                    binding.cbTime.setChecked(false);
                     binding.ringHolder.setValue(seekBar.getProgress() / 10f);
+                }
 
             }
 
