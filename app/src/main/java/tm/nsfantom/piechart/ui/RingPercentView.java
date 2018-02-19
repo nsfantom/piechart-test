@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -97,6 +98,7 @@ public class RingPercentView extends FrameLayout {
             rectF.set(deltaOut, deltaOut, canvas.getWidth() - deltaOut, canvas.getHeight() - deltaOut);
             canvas.drawArc(rectF, startAngle, valueAngle, true, paint);
 
+
             deltaIn = delta * 3;
             rectF.set(deltaIn, deltaIn, canvas.getWidth() - deltaIn, canvas.getHeight() - deltaIn);
             canvas.drawArc(rectF, valueAngle - fixAngle, 360 - valueAngle, true, paintErase);
@@ -104,7 +106,24 @@ public class RingPercentView extends FrameLayout {
             deltaIn = delta * 4;
             rectF.set(deltaIn, deltaIn, canvas.getWidth() - deltaIn, canvas.getHeight() - deltaIn);
             canvas.drawArc(rectF, 0, 360, true, paintErase);
+//            paint.setColor(Color.BLACK);
+            String s = String.valueOf(percent).concat("%");
+//            canvas.drawText(s,canvas.getWidth()/2,(int) ((canvas.getHeight() / 2) - ((paint.descent() + paint.ascent()) / 2)),paint);
+            drawCenter(canvas,paint,s);
 
+        }
+
+        private Rect r = new Rect();
+
+        private void drawCenter(Canvas canvas, Paint paint, String text) {
+            canvas.getClipBounds(r);
+            int cHeight = r.height();
+            int cWidth = r.width();
+            paint.setTextAlign(Paint.Align.LEFT);
+            paint.getTextBounds(text, 0, text.length(), r);
+            float x = cWidth / 2f - r.width() / 2f - r.left;
+            float y = cHeight / 2f + r.height() / 2f - r.bottom;
+            canvas.drawText(text, x, y, paint);
         }
     }
 }
