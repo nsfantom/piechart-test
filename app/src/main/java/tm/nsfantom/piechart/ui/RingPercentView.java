@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import timber.log.Timber;
 import tm.nsfantom.piechart.R;
 
 /**
@@ -53,9 +54,9 @@ public class RingPercentView extends FrameLayout {
 
     private class RingView extends View {
         private Paint paint;
+        private final Paint paintErase;
         private float percent = 33f;
-        private Paint paintValue;
-        private RectF rectEmpty;
+        private RectF rectF;
         private int delta = 5;
         private int deltaIn = 10;
         private int deltaOut = 10;
@@ -67,12 +68,12 @@ public class RingPercentView extends FrameLayout {
         public RingView(Context context) {
             super(context);
             setFocusable(true);
-            paint = new Paint();
-            paint.setAntiAlias(true);
-            paintValue = new Paint();
-            rectEmpty = new RectF();
-            setBackgroundColor(Color.WHITE);
+            paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+            paintErase = new Paint(Paint.ANTI_ALIAS_FLAG);
+            paintErase.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_OUT));
+            rectF = new RectF();
             valueAngle = (int) (360 * (percent / 100));
+            setLayerType(LAYER_TYPE_HARDWARE, null);
         }
 
         public void setValue(float percent) {
@@ -84,25 +85,25 @@ public class RingPercentView extends FrameLayout {
 
         @Override
         protected void onDraw(Canvas canvas) {
-            Timber.e("valueAngle: %s", valueAngle);
             delta = canvas.getWidth() / 10;
-            paint.setColor(Color.RED);
-            deltaIn = delta * 3;
-            deltaOut = delta * 2;
-            rectEmpty.set(deltaOut, deltaOut, canvas.getWidth() - deltaOut, canvas.getHeight() - deltaOut);
-            canvas.drawArc(rectEmpty, valueAngle - fixAngle, 360 - valueAngle, true, paint);
-            paint.setColor(Color.WHITE);
-            rectEmpty.set(deltaIn, deltaIn, canvas.getWidth() - deltaIn, canvas.getHeight() - deltaIn);
-            canvas.drawArc(rectEmpty, valueAngle - fixAngle, 360 - valueAngle, true, paint);
 
-            paint.setColor(Color.CYAN);
-            deltaIn = delta * 4;
+            deltaOut = delta * 2;
+            paint.setColor(Color.RED);
+            rectF.set(deltaOut, deltaOut, canvas.getWidth() - deltaOut, canvas.getHeight() - deltaOut);
+            canvas.drawArc(rectF, valueAngle - fixAngle, 360 - valueAngle, true, paint);
+
             deltaOut = delta;
-            rectEmpty.set(deltaOut, deltaOut, canvas.getWidth() - deltaOut, canvas.getHeight() - deltaOut);
-            canvas.drawArc(rectEmpty, startAngle, valueAngle, true, paint);
-            paint.setColor(Color.WHITE);
-            rectEmpty.set(deltaIn, deltaIn, canvas.getWidth() - deltaIn, canvas.getHeight() - deltaIn);
-            canvas.drawArc(rectEmpty, 0, 360, true, paint);
+            paint.setColor(Color.CYAN);
+            rectF.set(deltaOut, deltaOut, canvas.getWidth() - deltaOut, canvas.getHeight() - deltaOut);
+            canvas.drawArc(rectF, startAngle, valueAngle, true, paint);
+
+            deltaIn = delta * 3;
+            rectF.set(deltaIn, deltaIn, canvas.getWidth() - deltaIn, canvas.getHeight() - deltaIn);
+            canvas.drawArc(rectF, valueAngle - fixAngle, 360 - valueAngle, true, paintErase);
+
+            deltaIn = delta * 4;
+            rectF.set(deltaIn, deltaIn, canvas.getWidth() - deltaIn, canvas.getHeight() - deltaIn);
+            canvas.drawArc(rectF, 0, 360, true, paintErase);
 
         }
     }
