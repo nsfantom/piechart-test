@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="tm.nsfantom.piechart.activity.RingActivity"
-        android:background="@color/colorPrimaryDark">
+        android:background="@drawable/ic_launcher_background">
 
         <tm.nsfantom.piechart.ui.RingPercentView
             android:id="@+id/ringHolder"

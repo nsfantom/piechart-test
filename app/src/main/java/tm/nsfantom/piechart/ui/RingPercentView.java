@@ -88,27 +88,31 @@ public class RingPercentView extends FrameLayout {
         protected void onDraw(Canvas canvas) {
             delta = canvas.getWidth() / 10;
 
+            // Small arc (empty)
             deltaOut = delta * 2;
             paint.setColor(Color.RED);
             rectF.set(deltaOut, deltaOut, canvas.getWidth() - deltaOut, canvas.getHeight() - deltaOut);
             canvas.drawArc(rectF, valueAngle - fixAngle, 360 - valueAngle, true, paint);
 
+            // Big arc (value)
             deltaOut = delta;
             paint.setColor(Color.CYAN);
             rectF.set(deltaOut, deltaOut, canvas.getWidth() - deltaOut, canvas.getHeight() - deltaOut);
             canvas.drawArc(rectF, startAngle, valueAngle, true, paint);
 
-
+            // Erase small arc (empty)
             deltaIn = delta * 3;
             rectF.set(deltaIn, deltaIn, canvas.getWidth() - deltaIn, canvas.getHeight() - deltaIn);
             canvas.drawArc(rectF, valueAngle - fixAngle, 360 - valueAngle, true, paintErase);
 
+            // Erase big arc (value)
             deltaIn = delta * 4;
             rectF.set(deltaIn, deltaIn, canvas.getWidth() - deltaIn, canvas.getHeight() - deltaIn);
             canvas.drawArc(rectF, 0, 360, true, paintErase);
-//            paint.setColor(Color.BLACK);
+
+            // Draw text in center
             String s = String.valueOf(percent).concat("%");
-//            canvas.drawText(s,canvas.getWidth()/2,(int) ((canvas.getHeight() / 2) - ((paint.descent() + paint.ascent()) / 2)),paint);
+            paint.setColor(Color.BLACK);
             drawCenter(canvas,paint,s);
 
         }
