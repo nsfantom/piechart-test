@@ -22,7 +22,7 @@ public final class RingActivity extends AppCompatActivity {
             binding.seekBar.setProgress(progress);
             binding.ringHolder.setValue(progress/10f);
             if (started)
-                handler.postDelayed(this, 99);
+                handler.postDelayed(this, 19);
         }
     };
 
