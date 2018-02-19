@@ -20,9 +20,8 @@ public final class RingActivity extends AppCompatActivity {
         public void run() {
             int progress = (int) (System.currentTimeMillis() % 1000);
             binding.seekBar.setProgress(progress);
-            binding.ringHolder.setValue(progress/10f);
-            if (started)
-                handler.postDelayed(this, 19);
+            binding.ringHolder.setValue(progress / 10f);
+            if (started) handler.postDelayed(this, 19);
         }
     };
 
@@ -38,7 +37,7 @@ public final class RingActivity extends AppCompatActivity {
         binding.seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if (fromUser){
+                if (fromUser) {
                     binding.cbTime.setChecked(false);
                     binding.ringHolder.setValue(seekBar.getProgress() / 10f);
                 }
@@ -57,13 +56,12 @@ public final class RingActivity extends AppCompatActivity {
         });
         binding.seekBar.setProgress(333);
         binding.cbTime.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                handler.post(() -> {started=true;
+            if (isChecked)
+                handler.post(() -> {
+                    started = true;
                     rTimer.run();
                 });
-            } else {
-                started =false;
-            }
+            else started = false;
         });
     }
 
