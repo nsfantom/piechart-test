@@ -29,5 +29,6 @@ public class MainActivity extends AppCompatActivity {
         binding.btnNotification.setOnClickListener(v-> startActivity(new Intent(this, NotificationActivity.class)));
         binding.btnDragDrop.setOnClickListener(v-> startActivity(new Intent(this, DragDropActivity.class)));
         binding.btnRing.setOnClickListener(v->startActivity(new Intent(this,RingActivity.class)));
+        binding.btnHexagon.setOnClickListener(v->startActivity(new Intent(this,HexagonActivity.class)));
     }
 }

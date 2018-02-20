@@ -16,7 +16,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed"/>
+            app:layout_constraintVertical_chainStyle="packed"
+            android:theme="@style/FlatButton"/>
 
         <Button
             android:id="@+id/btnCustomCheckList"
@@ -26,7 +27,8 @@
             app:layout_constraintBottom_toTopOf="@+id/btnContryList"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnPieChart" />
+            app:layout_constraintTop_toBottomOf="@+id/btnPieChart"
+            android:theme="@style/FlatButton"/>
 
         <Button
             android:id="@+id/btnContryList"
@@ -36,7 +38,8 @@
             app:layout_constraintBottom_toTopOf="@+id/btnNotification"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnCustomCheckList" />
+            app:layout_constraintTop_toBottomOf="@+id/btnCustomCheckList"
+            android:theme="@style/FlatButton"/>
 
         <Button
             android:id="@+id/btnNotification"
@@ -46,7 +49,8 @@
             app:layout_constraintBottom_toTopOf="@+id/btnDragDrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnContryList" />
+            app:layout_constraintTop_toBottomOf="@+id/btnContryList"
+            android:theme="@style/FlatButton"/>
 
         <Button
             android:id="@+id/btnDragDrop"
@@ -56,15 +60,29 @@
             app:layout_constraintBottom_toTopOf="@+id/btnRing"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnNotification" />
+            app:layout_constraintTop_toBottomOf="@+id/btnNotification"
+            android:theme="@style/FlatButton"/>
+
         <Button
             android:id="@+id/btnRing"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="RingProgress"
+            app:layout_constraintBottom_toTopOf="@+id/btnHexagon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnDragDrop"
+            android:theme="@style/FlatButton"/>
+
+        <Button
+            android:id="@+id/btnHexagon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hexagon Views"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnDragDrop" />
+            app:layout_constraintTop_toBottomOf="@+id/btnRing"
+            android:theme="@style/FlatButton"/>
     </android.support.constraint.ConstraintLayout>
 </layout>

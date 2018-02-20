@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -10,37 +10,38 @@
             android:id="@+id/combiList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:list_title="Test Description"
-            app:multiSelect="false"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/switchMulti"
-            app:layout_constraintVertical_chainStyle="spread_inside">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="spread_inside"
+            app:list_title="Test Description"
+            app:multiSelect="false">
 
         </tm.nsfantom.piechart.ui.CombiList>
 
-        <Switch
+        <android.support.v7.widget.SwitchCompat
             android:id="@+id/switchMulti"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="multi select"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/switchSelect"
-            app:layout_constraintTop_toBottomOf="@+id/combiList"
+            android:layout_margin="8dp"
+            android:text="@string/multi_select"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/switchSelect"
             app:layout_constraintHorizontal_chainStyle="packed"
-            android:layout_margin="8dp"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/combiList" />
 
-        <Switch
+        <android.support.v7.widget.SwitchCompat
             android:id="@+id/switchSelect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="up/down"
-            app:layout_constraintStart_toEndOf="@+id/switchMulti"
+            android:text="@string/up_down"
+            app:layout_constraintBottom_toBottomOf="@+id/switchMulti"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/switchMulti"
-            app:layout_constraintBottom_toBottomOf="@+id/switchMulti"/>
+            app:layout_constraintStart_toEndOf="@+id/switchMulti"
+            app:layout_constraintTop_toTopOf="@+id/switchMulti" />
+
     </android.support.constraint.ConstraintLayout>
 
 
