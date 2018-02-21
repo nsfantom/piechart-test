@@ -26,7 +26,7 @@ public final class HexagonActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if (fromUser) {
-                    binding.hexagonHolder.setValue(progress);
+                    binding.hexagonHolder.setChildCount(progress);
                 }
 
             }
@@ -38,9 +38,28 @@ public final class HexagonActivity extends AppCompatActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                binding.hexagonHolder.setValue(seekBar.getProgress());
+
             }
         });
         binding.seekBar.setProgress(6);
+        binding.seekBarEdges.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if (fromUser) {
+                    binding.hexagonHolder.setValue(progress);
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+//                binding.hexagonHolder.setValue(seekBar.getProgress());
+            }
+        });
+        binding.seekBarEdges.setProgress(6);
     }
 }
