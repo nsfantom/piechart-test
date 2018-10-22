@@ -17,4 +17,14 @@
         <attr name="footer_text" format="string" value="End"/>
         <attr name="text_color" format="color"/>
     </declare-styleable>
+
+    <declare-styleable name="DiscreteSlider">
+        <attr name="tickMarkCount" format="integer" />
+        <attr name="tickMarkRadius" format="dimension" />
+        <attr name="position" format="integer" />
+        <attr name="backdropStrokeColor" format="color" />
+        <attr name="backdropStrokeWidth" format="dimension" />
+        <attr name="thumb" format="reference" />
+        <attr name="progressDrawable" format="reference" />
+    </declare-styleable>
 </resources>

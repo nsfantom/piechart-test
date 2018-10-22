@@ -24,6 +24,8 @@
         <activity android:name=".activity.DragDropActivity"/>
         <activity android:name=".activity.RingActivity" />
         <activity android:name=".activity.HexagonActivity" />
+        <activity android:name=".activity.SeekBarActivity" />
+        <activity android:name=".activity.ScheduleActivity"/>
     </application>
 
 </manifest>

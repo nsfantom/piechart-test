@@ -30,5 +30,7 @@ public class MainActivity extends AppCompatActivity {
         binding.btnDragDrop.setOnClickListener(v-> startActivity(new Intent(this, DragDropActivity.class)));
         binding.btnRing.setOnClickListener(v->startActivity(new Intent(this,RingActivity.class)));
         binding.btnHexagon.setOnClickListener(v->startActivity(new Intent(this,HexagonActivity.class)));
+        binding.btnHexagonCustomSeek.setOnClickListener(v->startActivity(new Intent(this, SeekBarActivity.class)));
+        binding.btnSchedule.setOnClickListener(v->startActivity(new Intent(this, ScheduleActivity.class)));
     }
 }

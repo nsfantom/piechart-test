@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/seekHolder"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_gravity="bottom"
+    android:background="@color/grey_100"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/seekBar">
+
+    <RelativeLayout
+        android:id="@+id/tick_mark_labels_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="12dp"/>
+
+    <tm.nsfantom.piechart.ui.seekbar.DiscreteSlider
+        android:id="@+id/seekBarEdges"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:layout_gravity="bottom"
+        android:background="@null"
+        app:backdropStrokeColor="@color/grey_300"
+        app:backdropStrokeWidth="1dp"
+        app:tickMarkCount="6"
+        app:position="1" />
+</LinearLayout>

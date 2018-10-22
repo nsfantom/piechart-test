@@ -79,10 +79,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hexagon Views"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/btnHexagonCustomSeek"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnRing"
+            android:theme="@style/FlatButton"/>
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btnHexagonCustomSeek"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hexagon Views seek"
+            app:layout_constraintBottom_toTopOf="@+id/btnSchedule"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnHexagon"
+            android:theme="@style/FlatButton"/>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btnSchedule"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ScheduleCheckBox"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnHexagonCustomSeek"
             android:theme="@style/FlatButton"/>
     </android.support.constraint.ConstraintLayout>
 </layout>
