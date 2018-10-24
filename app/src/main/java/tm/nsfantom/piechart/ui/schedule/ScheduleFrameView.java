@@ -3,13 +3,13 @@ package tm.nsfantom.piechart.ui.schedule;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.AppCompatCheckBox;
 import android.util.AttributeSet;
 import android.util.SparseBooleanArray;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.Switch;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -64,7 +64,7 @@ public class ScheduleFrameView extends FrameLayout {
 
         TableRow tempRow;
         TextView tempTV;
-        Switch checkBox;
+        AppCompatCheckBox checkBox;
 
         for (int j = 0; j < columnCount; j++) {
             tempTV = new TextView(getContext());
@@ -82,15 +82,16 @@ public class ScheduleFrameView extends FrameLayout {
             tempRow.addView(tempTV);
             days.put(periodName, new SparseBooleanArray());
             for (int j = 0; j < columnCount; j++) {
-                checkBox = new Switch(getContext());
+                checkBox = new AppCompatCheckBox(getContext());
                 checkBox.setGravity(Gravity.CENTER);
+
                 final int index = j;
 
                 checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
                     days.get(periodName).put(index,isChecked);
                     Toast.makeText(getContext(), "clicked: "+periodName+" item: "+index, Toast.LENGTH_SHORT).show();
                 });
-                tempRow.addView(checkBox);
+                tempRow.addView(checkBox, new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
             }
             tableLayout.addView(tempRow);
         }
