@@ -30,4 +30,8 @@
 
     <color name="fifty_percent_transparency_primary">#8003A9F4</color>
     <color name="fifty_percent_transparency_darker_primary_dark">#80028bca</color>
+
+    <color name="colorTextScheduleDays">#6a7275</color>
+    <color name="colorTextScheduleDaysHoliday">#bcc7cd</color>
+    <color name="colorGroupBackground">#f7f7f7</color>
 </resources>
